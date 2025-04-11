@@ -19,10 +19,17 @@ class StringCalculator
 
   private
   def numbers
-    numbers_string.split(default_delimiter)
+    @_numbers ||= numbers_string.split(delimiter)
   end
 
-  def default_delimiter
-    /[,;\n]/
+  def delimiter
+    custom_delimiter || /[,;\n]/
+  end
+
+  def custom_delimiter
+    @_delimiter ||=
+      if numbers_string.start_with?("//")
+        Regexp.new(Regexp.escape(numbers_string.split("\n")[0][2..]))
+      end
   end
 end
