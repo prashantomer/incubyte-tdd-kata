@@ -13,5 +13,12 @@ RSpec.describe StringCalculator do
   # Test for more than one number (2 or more) with comma delimiter
   it "returns the sum of two numbers" do
     expect(StringCalculator.add("1,2")).to eq(3)
+    expect(StringCalculator.add("1,2,3")).to eq(6)
+  end
+
+  # Test for semicolon delimiter
+  it "returns the sum of two numbers" do
+    expect(StringCalculator.add("1;2")).to eq(3)
+    expect(StringCalculator.add("1;2,3")).to eq(6)
   end
 end
