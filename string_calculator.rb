@@ -14,9 +14,9 @@ class StringCalculator
 
   def add
     return 0 if numbers_string.empty?
-    
+
     check_if_negative_numbers
-    numbers.inject(0) { |sum, number| number.to_i + sum }
+    numbers.inject(0) { |sum, number| number.to_i > 1000 ? sum : number.to_i + sum }
   end
 
   private

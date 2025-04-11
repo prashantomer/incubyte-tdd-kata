@@ -80,5 +80,32 @@ RSpec.describe StringCalculator do
         expect { StringCalculator.add("1,-2,-3") }.to raise_error(RuntimeError, "Negative numbers not allowed: -2, -3")
       end
     end
+
+    context "Additional Steps" do
+      context "with numbers greater than 1000" do
+        # Test for numbers greater than 1000
+        it "ignores numbers greater than 1000" do
+          expect(StringCalculator.add("1,2,1001")).to eq(3)
+        end
+        # Test for multiple numbers greater than 1000
+        it "ignores multiple numbers greater than 1000" do
+          expect(StringCalculator.add("1,2,1001,1002")).to eq(3)
+        end
+        # Test for a single number greater than 1000
+        it "ignores a single number greater than 1000" do
+          expect(StringCalculator.add("1001")).to eq(0)
+        end
+
+        # Test for a single number greater than 1000 with custom delimiter
+        it "ignores a single number greater than 1000 with custom delimiter" do
+          expect(StringCalculator.add("//;\n1001")).to eq(0)
+        end
+
+        # Test for a single number greater than 1000 with custom delimiter and other numbers
+        it "ignores a single number greater than 1000 with custom delimiter and other numbers" do
+          expect(StringCalculator.add("//;\n1;2;1001")).to eq(3)
+        end
+      end
+    end
   end
 end
