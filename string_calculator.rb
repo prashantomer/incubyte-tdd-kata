@@ -31,7 +31,13 @@ class StringCalculator
   def custom_delimiter
     @_delimiter ||=
       if numbers_string.start_with?("//")
-        Regexp.new(Regexp.escape(numbers_string.split("\n")[0][2..]))
+        del_header = numbers_string.split("\n", 2)[0]
+        if del_header.match?(/\[(.+)\]/)
+          delimiter_rgxs = del_header.scan(/\[(.*?)\]\n/).flatten.map { |del| Regexp.escape(del) }
+          Regexp.new(delimiter_rgxs.join('|'))
+        else
+          Regexp.new(Regexp.escape(del_header[2..]))
+        end
       end
   end
 

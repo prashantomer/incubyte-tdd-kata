@@ -106,6 +106,23 @@ RSpec.describe StringCalculator do
           expect(StringCalculator.add("//;\n1;2;1001")).to eq(3)
         end
       end
+
+      context "with custom delimiters of varying lengths" do
+        # Test for custom delimiter of varying lengths
+        it "returns the sum of numbers separated by custom delimiters of varying lengths" do
+          expect(StringCalculator.add("//[***]\n1***2***3")).to eq(6)
+        end
+
+        # Test for multiple custom delimiters of varying lengths
+        it "returns the sum of numbers separated by multiple custom delimiters of varying lengths" do
+          expect(StringCalculator.add("//[*][%]\n1*2%3")).to eq(6)
+        end
+
+        # Test for multiple custom delimiters of varying lengths with more than 2 numbers
+        it "returns the sum of numbers separated by multiple custom delimiters of varying lengths" do
+          expect(StringCalculator.add("//[**][%%]\n1**2%%3")).to eq(6)
+        end
+      end
     end
   end
 end
